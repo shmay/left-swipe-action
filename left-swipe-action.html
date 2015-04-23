@@ -208,8 +208,8 @@ CSS for both the main content and buttons in light DOM will be just applied.
               this.async(this.transition);
 
               this.async(function() {
-                this.sliding = this.$.swipe.open;
-              }, null, 100);
+                this.sliding = this.open;
+              }, null, 150);
             },
 
             transition: function(){
