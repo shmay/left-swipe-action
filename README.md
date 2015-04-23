@@ -1,6 +1,7 @@
 # &lt;left-swipe-action&gt;
 
-### Kyles'updates:
+### Kyle's updates:
+
 
 * added an `isSliding` method that indicates whether the item is being slid (useful for tap events that you only want to take effect if the item is closed)
 * fixed potential memory leak
