@@ -1,5 +1,10 @@
 # &lt;left-swipe-action&gt;
 
+### Kyles'updates:
+
+* added an `isSliding` method that indicates whether the item is being slid (useful for tap events that you only want to take effect if the item is closed)
+* fixed potential memory leak
+
 ## Polymer Web Component &lt;left-swipe-action&gt;
 
 &lt;left-swipe-action&gt; is built with [Polymer](http://www.polymer-project.org/) to enables a left swipe gesture to open a content and show behind action buttons like iOS item list.
