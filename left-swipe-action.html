@@ -22,7 +22,7 @@ CSS for both the main content and buttons in light DOM will be just applied.
 -->
 <link rel="import" href="left-swipe-action-button.html">
 
-<polymer-element name="left-swipe-action" attributes="open nodrag offset shadow sliding">
+<polymer-element name="left-swipe-action" attributes="open nodrag offset shadow">
     <template>
         <style>
             :host {
@@ -219,6 +219,10 @@ CSS for both the main content and buttons in light DOM will be just applied.
             toggleOpen: function(){
                 this.open = !this.open;
                 this.transition();
+            },
+
+            isSliding: function() {
+              return this.sliding;
             },
 
             // must pass *same* function instance to both (add|remove)EventListener, so bind in created
