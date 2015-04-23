@@ -22,7 +22,7 @@ CSS for both the main content and buttons in light DOM will be just applied.
 -->
 <link rel="import" href="left-swipe-action-button.html">
 
-<polymer-element name="left-swipe-action" attributes="open nodrag offset shadow">
+<polymer-element name="left-swipe-action" attributes="open nodrag offset shadow sliding">
     <template>
         <style>
             :host {
@@ -163,6 +163,15 @@ CSS for both the main content and buttons in light DOM will be just applied.
              */
             shadow: false,
 
+             /**
+             * If true, item is being slid
+             *
+             * @attribute sliding
+             * @type boolean
+             * @default false
+             */
+            sliding: false,
+
             ready: function(){
                 var n = this.$.content;
                 if(this.nodrag){
@@ -181,20 +190,26 @@ CSS for both the main content and buttons in light DOM will be just applied.
             },
 
             onMove: function(e){
-                var p = this.point;
-                if(p){
-                    p.update(e.clientX);
-                    util.applyTransform(this.$.content, this.open ? this.offset - this.$.content.clientWidth + p.distance() : p.distance());
-                }
+              var p = this.point;
+              if(p){
+                p.update(e.clientX);
+                util.applyTransform(this.$.content, this.open ? this.offset - this.$.content.clientWidth + p.distance() : p.distance());
+              }
+
+              this.sliding = true;
             },
 
             onUp: function(e){
-                var p = this.point;
-                if(!p){ return; }
-                this.open = p && p.isFlick();
-                this.point = null;
-                // apply css fixed-true before transition
-                this.async(this.transition);
+              var p = this.point;
+              if(!p){ return; }
+              this.open = p && p.isFlick();
+              this.point = null;
+              // apply css fixed-true before transition
+              this.async(this.transition);
+
+              this.async(function() {
+                this.sliding = this.$.swipe.open;
+              }, null, 100);
             },
 
             transition: function(){
